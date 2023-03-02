@@ -19,9 +19,13 @@ const addBlog = async (req,res) => {
 }
 
 const getBlogs = async (req,res) => {   
+    try {
         let data = await Blog.find()
         if (!data) return res.status(204).json({"message" : "No Blogs Found"})
         res.status(200).send(data); 
+    } catch (err) {
+        res.status(400).send(err);  
+    }
 }
 
 const getABlog = async (req,res) => {
